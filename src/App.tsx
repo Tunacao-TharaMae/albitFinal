@@ -55,8 +55,8 @@ function App() {
 
     try {
       if (editingItem) {
-        // Update item
-        const response = await fetch(`${API_URL}/${editingItem.id}`, {
+        // Update item using query parameter
+        const response = await fetch(`${API_URL}?id=${editingItem.id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(itemData),
@@ -99,7 +99,7 @@ function App() {
     setError(null);
 
     try {
-      const response = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+      const response = await fetch(`${API_URL}?id=${id}`, { method: 'DELETE' });
       if (!response.ok) throw new Error('Failed to delete item');
       setItems(items.filter(item => item.id !== id));
       setMessage('Item deleted successfully');
