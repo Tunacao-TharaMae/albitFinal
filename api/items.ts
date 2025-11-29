@@ -2,11 +2,11 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import mysql from 'mysql2/promise';
 
 const dbConfig = {
-  host: process.env.MYSQLHOST,
+  host: process.env.MYSQLHOST,        // hopper.proxy.rlwy.net
   user: process.env.MYSQLUSER,
   password: process.env.MYSQLPASSWORD,
   database: process.env.MYSQLDATABASE,
-  port: Number(process.env.MYSQLPORT) || 3306,
+  port: Number(process.env.MYSQLPORT) || 3306,  // 55595
 };
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
