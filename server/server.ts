@@ -27,7 +27,6 @@ const db = mysql.createPool({
   port: Number(process.env.MYSQLPORT) || 3306,
 });
 
-
 // TEST DB CONNECTION
 db.getConnection()
   .then(() => console.log("Connected to Railway MySQL!"))
@@ -38,7 +37,7 @@ db.getConnection()
 // ===============================
 
 // Get all items
-app.get("/api/items", async (req, res) => {
+app.get("/api/items", async (_req, res) => {
   try {
     const [rows]: any = await db.query("SELECT * FROM items");
     res.json(rows);
@@ -91,9 +90,8 @@ app.put("/api/items/:id", async (req, res) => {
 });
 
 // Delete item
-app.delete("/api/items/:id", async (req, res) => {
-  const { id } = req.params;
-
+app.delete("/api/items/:id", async (_req, res) => {
+  const { id } = _req.params; // If you want, you can keep _req for unused warning
   try {
     await db.query("DELETE FROM items WHERE id = ?", [id]);
     res.json({ success: true });
@@ -106,7 +104,7 @@ app.delete("/api/items/:id", async (req, res) => {
 //       DEPARTMENTS CRUD
 // ===============================
 
-app.get("/departments", async (req, res) => {
+app.get("/departments", async (_req, res) => {
   try {
     const [rows]: any = await db.query("SELECT * FROM departments");
     res.json(rows);
