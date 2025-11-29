@@ -10,12 +10,12 @@ const dbConfig = {
 };
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  // ⚡ CORS headers for frontend
+  // ⚡ CORS headers
   res.setHeader('Access-Control-Allow-Origin', 'https://albit-final2.vercel.app');
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  // Handle preflight requests
+  // Handle preflight
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   let connection;
