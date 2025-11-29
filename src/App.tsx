@@ -1,7 +1,7 @@
 import { useState, useEffect, type FormEvent } from 'react';
 import './App.css';
 
-const API_URL = "https://albit-final.vercel.app/api/items";
+const API_URL = "https://albit-final2.vercel.app/api/items";
 
 interface Item {
   id: number;

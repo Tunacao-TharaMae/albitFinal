@@ -2,16 +2,25 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import mysql from 'mysql2/promise';
 
 const dbConfig = {
-  host: process.env.MYSQLHOST,        // hopper.proxy.rlwy.net
+  host: process.env.MYSQLHOST,
   user: process.env.MYSQLUSER,
   password: process.env.MYSQLPASSWORD,
   database: process.env.MYSQLDATABASE,
-  port: Number(process.env.MYSQLPORT) || 3306,  // 55595
+  port: Number(process.env.MYSQLPORT) || 3306,
 };
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  let connection;
+  // ⚡ Add CORS headers for frontend
+  res.setHeader('Access-Control-Allow-Origin', 'https://albit-final2.vercel.app');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
+  // Handle preflight requests
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
+  let connection;
   console.log('Attempting DB connection:', {
     host: dbConfig.host,
     user: dbConfig.user,
